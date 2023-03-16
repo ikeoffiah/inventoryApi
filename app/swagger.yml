@@ -1,0 +1,602 @@
+openapi: 3.0.0
+info:
+  title: Inventory Management API
+  description: API for Inventory Management
+  version: '1.0.0'
+tags:
+  - name: Categories
+  - name: Products
+paths:
+  /api/inventory/category:
+    get:
+      summary: Get Category
+      description: Get all Category
+      tags:
+        - Categories
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: Id of Category
+                      example: 6411ae26298d3f09bc3ccf54
+                    name:
+                      type: string
+                      description: Name of Category
+                      example: Watches
+                    createdAt:
+                      type: string
+                      description: Time Category is created
+                      example: '2023-03-15T11:38:14.727Z'
+                    updatedAt:
+                      type: string
+                      description: Time Category is updated
+                      example: '2023-03-15T11:38:14.727Z'
+    post:
+      summary: Create Category
+      description: Create a new Category
+      tags:
+        - Categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of Category
+                  example: Watches
+      responses:
+        '201':
+          description: Category Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Id of Category
+                    example: 6411ae26298d3f09bc3ccf54
+                  name:
+                    type: string
+                    description: Name of Category
+                    example: Watches
+                  createdAt:
+                    type: string
+                    description: Time Category is created
+                    example: '2023-03-15T11:38:14.727Z'
+                  updatedAt:
+                    type: string
+                    description: Time Category is updated
+                    example: '2023-03-15T11:38:14.727Z'
+        '400':
+          description: Please input Category name            
+  /api/inventory/category/{id}:
+    get:
+      summary: Get Category by Id
+      description: Get a Category by its Id
+      tags:
+        - Categories
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            example: 6411ae26298d3f09bc3ccf54
+          required: true
+          description: Id of Category
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Id of Category
+                    example: 6411ae26298d3f09bc3ccf54
+                  name:
+                    type: string
+                    description: Name of Category
+                    example: Watches
+                  createdAt:
+                    type: string
+                    description: Time Category is created
+                    example: '2023-03-15T11:38:14.727Z'
+                  updatedAt:
+                    type: string
+                    description: Time Category is updated
+                    example: '2023-03-15T11:38:14.727Z'
+        '404':
+          description: Category not found
+    put:
+      summary: Update Category
+      description: Update category by Id
+      tags:
+        - Categories
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            example: 6411ae26298d3f09bc3ccf54
+          required: true
+          description: Id of Category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of Category
+                  example: Watches
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Id of Category
+                    example: 6411ae26298d3f09bc3ccf54
+                  name:
+                    type: string
+                    description: Name of Category
+                    example: Watches
+                  createdAt:
+                    type: string
+                    description: Time Category is created
+                    example: '2023-03-15T11:38:14.727Z'
+                  updatedAt:
+                    type: string
+                    description: Time Category is updated
+                    example: '2023-03-15T11:38:14.727Z'
+        '404':
+          description: Category not found
+    delete:
+      summary: Delete a category
+      description: Delete a category by Id
+      tags:
+        - Categories
+      parameters:
+        - in: path
+          name: id
+          description: ID of category to delete
+          required: true
+          schema:
+            type: string
+            example: 6411ae26298d3f09bc3ccf54
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Category not found
+        '500':
+          description: Server error
+  /api/inventory/product:
+    get:
+      summary: Get all Products
+      description: Get all the products avaliable
+      tags:
+        - Products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: Id of Category
+                      example: 6411ae26298d3f09bc3ccf54
+                    category:
+                      type: string
+                      description: Id of Product Category
+                      example: 6411adcebca090f1474fcf8c
+                    name:
+                      type: string
+                      description: Name of Product
+                      example: Rolex
+                    price:
+                      type: number
+                      description: Price of the product
+                      example: 99.9
+                    description:
+                      type: string
+                      description: Description of Product
+                      example: This watch is good
+                    quantity:
+                      type: number
+                      description: Quantity of Product Avaliable
+                      example: 10
+                    image:
+                      type: string
+                      description: Image of the product
+                      example: http://res.cloudinary.com/dvjfsm8rc/image/upload/v1678905213/fuqn5zqic1whu3elftzn.png
+                    createdAt:
+                      type: string
+                      description: Time Category is created
+                      example: '2023-03-15T11:38:14.727Z'
+                    updatedAt:
+                      type: string
+                      description: Time Category is updated
+                      example: '2023-03-15T11:38:14.727Z'
+
+    post:
+      summary: Create Product
+      description: Create a new Product
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category:
+                    type: string
+                    description: Id of Product Category
+                    example: 6411adcebca090f1474fcf8c
+                name:
+                  type: string
+                  description: Name of Product
+                  example: Rolex
+                price:
+                  type: number
+                  description: Price of the product
+                  example: 99.9
+                quantity:
+                      type: number
+                      description: Quantity of Product Avaliable
+                      example: 10
+                description:
+                  type: string
+                  description: Description of Product
+                  example: This watch is good
+                image:
+                  type: file
+                  description: Image of the product
+      responses:
+        '201':
+          description: Category Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                      type: string
+                      description: Id of Category
+                      example: 6411ae26298d3f09bc3ccf54
+                  category:
+                    type: string
+                    description: Id of Product Category
+                    example: 6411adcebca090f1474fcf8c
+                  name:
+                    type: string
+                    description: Name of Product
+                    example: Rolex
+                  price:
+                    type: number
+                    description: Price of the product
+                    example: 99.9
+                  description:
+                    type: string
+                    description: Description of Product
+                    example: This watch is good
+                  quantity:
+                      type: number
+                      description: Quantity of Product Avaliable
+                      example: 10
+                  image:
+                    type: string
+                    description: Image of the product
+                    example: http://res.cloudinary.com/dvjfsm8rc/image/upload/v1678905213/fuqn5zqic1whu3elftzn.png
+                  createdAt:
+                    type: string
+                    description: Time Category is created
+                    example: '2023-03-15T11:38:14.727Z'
+                  updatedAt:
+                    type: string
+                    description: Time Category is updated
+                    example: '2023-03-15T11:38:14.727Z'
+
+  /api/inventory/product/{id}:
+    put:
+      summary: Update Product
+      description: Update a product by ID
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          description: ID of product to update
+          required: true
+          schema:
+            type: string
+            example: 6411e18bf48cdafd46763740
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category:
+                    type: string
+                    description: Id of Product Category
+                    example: 6411adcebca090f1474fcf8c
+                name:
+                  type: string
+                  description: Name of Product
+                  example: Rolex
+                price:
+                  type: number
+                  description: Price of the product
+                  example: 99.9
+                quantity:
+                      type: number
+                      description: Quantity of Product Avaliable
+                      example: 10
+                description:
+                  type: string
+                  description: Description of Product
+                  example: This watch is good
+                image:
+                  type: file
+                  description: Image of the product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Id of Product
+                    example: 6411e18bf48cdafd46763740
+                  name:
+                    type: string
+                    description: Name of Product
+                    example: Apple iPhone 13
+                  description:
+                    type: string
+                    description: Description of Product
+                    example: A brand new iPhone with all the latest features
+                  price:
+                    type: number
+                    description: Price of Product
+                    example: 999.99
+                  categoryId:
+                    type: string
+                    description: ID of the category the product belongs to
+                    example: 6411ae26298d3f09bc3ccf54
+                  quantity:
+                      type: number
+                      description: Quantity of Product Avaliable
+                      example: 10
+                  image:
+                    type: string
+                    description: Image of the product
+                    example: http://res.cloudinary.com/dvjfsm8rc/image/upload/v1678905213/fuqn5zqic1whu3elftzn.png
+                  createdAt:
+                    type: string
+                    description: Time Product is created
+                    example: '2023-03-15T11:38:14.727Z'
+                  updatedAt:
+                    type: string
+                    description: Time Product is updated
+                    example: '2023-03-15T11:38:14.727Z'
+        '404':
+          description: Product not found
+          
+    delete:
+      summary: Delete Product
+      description: Delete a product by ID
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          description: ID of product to delete
+          required: true
+          schema:
+            type: string
+            example: 6411e18bf48cdafd46763740
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Product not found
+        '500':
+          description: Server error
+    get:
+      summary: Get a product by id
+      description: Get a product by its id
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          description: ID of the product to retrieve
+          required: true
+          schema:
+            type: string
+            example: 6411ae26298d3f09bc3ccf54
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: ID of the product
+                    example: 6411ae26298d3f09bc3ccf54
+                  name:
+                    type: string
+                    description: Name of the product
+                    example: Smartwatch
+                  description:
+                    type: string
+                    description: Description of the product
+                    example: A smartwatch with fitness tracking features
+                  price:
+                    type: number
+                    description: Price of the product
+                    example: 99.99
+                  category:
+                    type: string
+                    description: ID of the category this product belongs to
+                    example: 6411ae26298d3f09bc3ccf54
+                  quantity:
+                      type: number
+                      description: Quantity of Product Avaliable
+                      example: 10
+                  image:
+                    type: string
+                    description: Image of the product
+                    example: http://res.cloudinary.com/dvjfsm8rc/image/upload/v1678905213/fuqn5zqic1whu3elftzn.png
+                  createdAt:
+                    type: string
+                    description: Time the product was created
+                    example: '2023-03-15T11:38:14.727Z'
+                  updatedAt:
+                    type: string
+                    description: Time the product was last updated
+                    example: '2023-03-15T11:38:14.727Z'
+        '404':
+          description: Product not found
+  /api/inventory/product/category/{id}/:
+    get:
+      summary: Get all products in a category by ID
+      description: Retrieves all products in a category specified by the ID parameter
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          description: ID of the category to retrieve products from
+          required: true
+          schema:
+            type: string
+            example: 6411ae26298d3f09bc3ccf54
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: Id of Category
+                      example: 6411ae26298d3f09bc3ccf54
+                    category:
+                      type: string
+                      description: Id of Product Category
+                      example: 6411adcebca090f1474fcf8c
+                    name:
+                      type: string
+                      description: Name of Product
+                      example: Rolex
+                    price:
+                      type: number
+                      description: Price of the product
+                      example: 99.9
+                    description:
+                      type: string
+                      description: Description of Product
+                      example: This watch is good
+                    quantity:
+                      type: number
+                      description: Quantity of Product Avaliable
+                      example: 10
+                    image:
+                      type: string
+                      description: Image of the product
+                      example: http://res.cloudinary.com/dvjfsm8rc/image/upload/v1678905213/fuqn5zqic1whu3elftzn.png
+                    createdAt:
+                      type: string
+                      description: Time Category is created
+                      example: '2023-03-15T11:38:14.727Z'
+                    updatedAt:
+                      type: string
+                      description: Time Category is updated
+                      example: '2023-03-15T11:38:14.727Z'
+        '404':
+          description: Product not found
+          
+# Add your schemas here
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        quantity:
+          type: number
+        image:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    Category:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+
+
+
+
+                      
+
+
+
+
+
+
+
